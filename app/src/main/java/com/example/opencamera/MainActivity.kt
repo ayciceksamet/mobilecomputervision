@@ -26,7 +26,7 @@ val permissions = arrayOf(
 
 class MainActivity : AppCompatActivity() {
 
-    private var lensFacing = CameraX.LensFacing.BACK
+    private var lensFacing = CameraX.LensFacing.FRONT
     private var imageCapture: ImageCapture? = null
     private var imagePreView: Preview? = null
     private lateinit var imageAnalysis: ImageAnalysis
@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
     companion object{
         val initialized = OpenCVLoader.initDebug()
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +87,7 @@ class MainActivity : AppCompatActivity() {
 
         val imageConfigAnalysis = ImageAnalysisConfig.Builder()
             .setImageReaderMode(ImageAnalysis.ImageReaderMode.ACQUIRE_LATEST_IMAGE)
+            .setLensFacing(lensFacing)
             .setCallbackHandler(Handler(analyzerThread.looper))
             .setImageQueueDepth(1).build()
 
